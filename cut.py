@@ -56,14 +56,10 @@ for t in timestamps:
 
 file = open('inputs.txt', 'w')
 for i in range(1, idx):
-  print(f'file out/{movie}{i}.mp4', file=file)
+  if os.path.getsize(f'out/{movie}{i}.mp4') > 0:
+    print(f'file out/{movie}{i}.mp4', file=file)
 
-if not os.path.exists(f'{output}'):
-  os.system(f'ffmpeg -f concat -i inputs.txt -vcodec copy -acodec copy {output}')
-
-
-
-
+os.system(f'ffmpeg -f concat -i inputs.txt -vcodec copy -acodec copy {output}')
 
 
 # ffmpeg -i Movie.mkv -ss 00:00:03 -t 00:00:01 -async 1 cut.mkv
